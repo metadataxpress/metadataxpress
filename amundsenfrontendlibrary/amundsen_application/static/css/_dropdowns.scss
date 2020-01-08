@@ -1,0 +1,27 @@
+@import 'variables';
+
+.dropdown {
+  .dropdown-toggle {
+    box-shadow: none;
+  }
+
+  .dropdown-menu {
+    box-shadow: 0 4px 12px -3px rgba(17, 17, 31, 0.12);
+    border-radius: 4px;
+    border: 1px solid $stroke;
+    padding: 0;
+    overflow: hidden;
+
+    li {
+      &:hover {
+        background-color: $body-bg-tertiary;
+      }
+      a {
+        padding: 8px;
+        &:hover {
+          background-color: inherit;
+        }
+      }
+    }
+  }
+}
