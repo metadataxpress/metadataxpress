@@ -1,0 +1,26 @@
+@import 'variables';
+
+.search-page {
+  display: flex;
+  min-height: calc(100% - #{$nav-bar-height + $footer-height});
+
+  .list-group {
+     margin-top: 0px;
+  }
+
+  .search-results {
+    flex-grow: 1;
+    width: 0; // Temporary hack since list-items use width %
+  }
+
+  @media (max-width: $screen-sm-max) {
+    .search-error {
+      margin-top: 16px;
+    }
+  }
+
+  .search-error {
+    text-align: center;
+    margin-top: 32px;
+  }
+}

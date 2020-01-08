@@ -1,0 +1,3 @@
+[flake8.extension]
+I20 = flake8_tidy_imports:ImportChecker
+

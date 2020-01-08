@@ -1,0 +1,178 @@
+Metadata-Version: 2.0
+Name: flake8-tidy-imports
+Version: 1.1.0
+Summary: A flake8 plugin that helps you write tidier imports.
+Home-page: https://github.com/adamchainz/flake8-tidy-imports
+Author: Adam Johnson
+Author-email: me@adamj.eu
+License: ISCL
+Keywords: f,l,a,k,e,8,_,t,i,d,y,_,i,m,p,o,r,t,s
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: ISC License (ISCL)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: flake8 (!=3.2.0)
+
+===================
+Flake8 Tidy Imports
+===================
+
+.. image:: https://img.shields.io/pypi/v/flake8-tidy-imports.svg
+        :target: https://pypi.python.org/pypi/flake8-tidy-imports
+
+.. image:: https://img.shields.io/travis/adamchainz/flake8-tidy-imports.svg
+        :target: https://travis-ci.org/adamchainz/flake8-tidy-imports
+
+A `flake8 <https://flake8.readthedocs.io/en/latest/index.html>`_ plugin that
+helps you write tidier imports.
+
+* Free software: ISC license
+
+Installation
+------------
+
+Install from ``pip`` with:
+
+.. code-block:: sh
+
+     pip install flake8-tidy-imports
+
+It will then automatically be run as part of ``flake8``; you can check it has
+been picked up with:
+
+.. code-block:: sh
+
+    $ flake8 --version
+    2.4.1 (pep8: 1.7.0, pyflakes: 0.8.1, flake8-tidy-imports: 1.0.0, mccabe: 0.3.1) CPython 2.7.11 on Darwin
+
+Options
+-------
+
+``banned-modules``
+~~~~~~~~~~~~~~~~~~
+
+Config for rule I201 (see below). A map where each line is a banned import
+string, followed by '=', then the message to use when encountering that banned
+import. Note that despite the name, you can ban imported objects too, since the
+syntax is the same, such as ``decimal.Decimal``.
+
+There is also a special directive to ban a preselected list of removed/moved
+modules between Python 2 and Python 3, recommending replacements, from `six
+<https://pythonhosted.org/six/>`_ where possible. It can be turned on by adding
+``{python2to3}`` to the list of ``banned-modules``.
+
+Whilst the option can be passed on the commandline, it's much easier to
+configure it in your config file, such as ``setup.cfg``, for example:
+
+.. code-block:: ini
+
+    [flake8]
+    banned-modules = mock = use unittest.mock!
+                     urlparse = use six.moves.urllib.parse!
+                     {python2to3}
+
+
+Rules
+-----
+
+Currently this plugin has two rules.
+
+I200: Unnecessary import alias
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Complains about unnecessary import aliasing of three forms:
+
+* ``import foo as foo`` -> ``import foo``
+* ``import foo.bar as bar`` -> ``from foo import bar``
+* ``from foo import bar as bar`` -> ``from foo import bar``
+
+The message includes the suggested rewrite (which may not be correct at
+current), for example:
+
+.. code-block:: sh
+
+    $ flake8 file.py
+    file.py:1:1: I200 Unnecessary import alias - rewrite as 'from foo import bar'.
+
+I201: Banned import 'foo' used
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Complains about importing of banned imports. This might be useful when
+refactoring code, for example when moving from Python 2 to 3. By default there
+are no imports banned - you should configure them with ``banned-modules`` as
+described above in 'Options'.
+
+The message includes a user-defined part that comes from the configuration. For
+example:
+
+.. code-block:: sh
+
+    $ flake8 file.py
+    file.py:1:1: I201 Banned import 'mock' used - use unittest.mock instead.
+
+
+=======
+History
+=======
+
+Pending Release
+---------------
+
+* New release notes here
+
+1.1.0 (2017-07-10)
+------------------
+
+* Added a big list of python 2 to 3 import bans for I201, which can be
+  activated by adding ``{python2to3}`` to the ``banned-modules`` option.
+
+1.0.6 (2017-03-07)
+------------------
+
+* Fixed the whitespace in the help message for ``--banned-modules``.
+
+1.0.5 (2017-01-13)
+------------------
+
+* Changed the error message for ``I201`` to be about the banned *import*
+  instead of *module*.
+* Fix a bug introduced in 1.0.4 that broke parsing relative imports.
+
+1.0.4 (2017-01-12)
+------------------
+
+* Don't allow installation with Flake8 3.2.0 which doesn't enable the plugin.
+  This bug was fixed in Flake8 3.2.1.
+* Use the most specific message available for a banned import.
+
+1.0.3 (2016-11-05)
+------------------
+
+* Fixed reading config from flake8 3+
+
+1.0.2 (2016-07-04)
+------------------
+
+* Fixed ``I201`` rule to detect banned imports like ``from x import y``.
+
+1.0.1 (2016-07-01)
+------------------
+
+* ``I201`` rule that allows you to configure complaining about certain modules
+  being imported, e.g. if you are moving from Python 2 to 3 you could stop
+  ``urlparse`` being imported in favour of ``six.moves.urllib.parse``.
+
+1.0.0 (2016-01-23)
+------------------
+
+* First release on PyPI.
+* ``I200`` rule that complains about unnecessary import aliasing, e.g.
+  ``from foo import bar as bar``.
+
+

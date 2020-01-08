@@ -1,0 +1,17 @@
+@import 'variables';
+
+.home-page {
+  .home-element-container {
+    margin-top: 64px;
+  }
+
+  .browse-tags-header {
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    .home-element-container {
+      margin-top: 32px;
+    }
+  }
+}
