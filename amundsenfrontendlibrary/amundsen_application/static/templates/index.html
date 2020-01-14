@@ -1,0 +1,19 @@
+<html>
+  <head>
+{% if <%= htmlWebpackPlugin.options.config.google.enabled%> %}
+{% include 'fragments/google-analytics-loader.html' %}
+{% endif %}
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/static/images/favicon.png">
+    <link href="/static/dist/main.css" type="text/css" rel="stylesheet"/>
+    <title>Amundsen - Data Discovery Portal</title>
+  </head>
+  <body>
+    <div id="content"/>
+    <script src="/static/dist/vendors.js" type="text/javascript"></script>
+    <script src="/static/dist/main.js" type="text/javascript"></script>
+  </body>
+{% if <%= htmlWebpackPlugin.options.config.google.enabled%> %}
+{% include 'fragments/google-analytics-post-loader.html' %}
+{% endif %}
+</html>

@@ -1,0 +1,68 @@
+// TODO - Override Bootstrap variables and delete this.
+@import 'variables';
+
+.popover {
+  background-color: $body-bg-dark;
+  border: 1px solid $body-bg-dark;
+  color: $text-inverse;
+  font-size: 12px;
+  padding: 5px;
+}
+.popover-title {
+  border-bottom: 1px solid $stroke;
+  color: $text-inverse;
+  font-size: 14px;
+  padding: 5px;
+}
+.popover-content {
+  padding: 2px 5px;
+  word-break: break-word;
+}
+.popover.right .arrow:after {
+  border-right-color: $body-bg-dark;
+}
+.popover.bottom .arrow:after {
+  border-bottom-color: $body-bg-dark;
+}
+.popover.top .arrow:after {
+  border-top-color: $body-bg-dark;
+}
+.popover.left .arrow:after {
+  border-left-color: $body-bg-dark;
+}
+
+.tooltip-inner {
+  padding: 0;
+  border-radius: 3px;
+  background-color: $body-bg-dark;
+}
+
+.tooltip-inner button {
+  height: 36px;
+  width: 96px;
+  font-size: 14px;
+  border-radius: 3px;
+  border: none;
+  background-color: $body-bg-dark;
+  color: $body-bg;
+  font-weight: $font-weight-body-bold;
+  outline: none;
+}
+.tooltip-inner button:hover {
+  color: $text-secondary;
+}
+
+.error-tooltip {
+  display: flex;
+  padding: 5px;
+}
+.error-tooltip button {
+  height: 24px;
+  width: 24px;
+  margin: auto;
+}
+
+.column-type-popover {
+  max-width: 552px; // arbitrary 2x default
+  word-break: break-word;
+}
